@@ -1,0 +1,401 @@
+<meta charset="utf-8">
+<title>Pointeuse — Heures par matricule</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#F4F5F1; --surface:#FFFFFF; --surface2:#ECEEE7;
+  --ink:#23281F; --muted:#6B7263; --line:#D8DCD0;
+  --accent:#4D6B2F; --accent-ink:#FFFFFF; --accent-soft:#E4EAD9;
+  --warn:#B07818; --warn-bg:#F7EEDC; --warn-line:#E3CC9A;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#171A15; --surface:#1F241C; --surface2:#262C22;
+    --ink:#E6E8E0; --muted:#98A08D; --line:#333A2E;
+    --accent:#9DB868; --accent-ink:#1B2212; --accent-soft:#2C3524;
+    --warn:#D9A441; --warn-bg:#2B2517; --warn-line:#4A3E22;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F4F5F1; --surface:#FFFFFF; --surface2:#ECEEE7;
+  --ink:#23281F; --muted:#6B7263; --line:#D8DCD0;
+  --accent:#4D6B2F; --accent-ink:#FFFFFF; --accent-soft:#E4EAD9;
+  --warn:#B07818; --warn-bg:#F7EEDC; --warn-line:#E3CC9A;
+}
+:root[data-theme="dark"]{
+  --bg:#171A15; --surface:#1F241C; --surface2:#262C22;
+  --ink:#E6E8E0; --muted:#98A08D; --line:#333A2E;
+  --accent:#9DB868; --accent-ink:#1B2212; --accent-soft:#2C3524;
+  --warn:#D9A441; --warn-bg:#2B2517; --warn-line:#4A3E22;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;
+}
+.wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px; display:flex; flex-direction:column; gap:24px}
+header h1{margin:0; font-size:26px; font-weight:700; letter-spacing:-.01em; text-wrap:balance}
+header p{margin:6px 0 0; color:var(--muted); max-width:62ch}
+.label{
+  display:block; font-size:11.5px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:8px;
+}
+.inputs{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+@media (max-width:760px){ .inputs{grid-template-columns:1fr} }
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px 16px}
+textarea{
+  width:100%; height:170px; resize:vertical;
+  background:var(--surface2); color:var(--ink);
+  border:1px solid var(--line); border-radius:6px; padding:10px 12px;
+  font:12.5px/1.5 var(--mono); white-space:pre;
+}
+textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent}
+.hint{margin:8px 0 0; font-size:12.5px; color:var(--muted)}
+.toolbar{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
+.toolbar input[type=search]{
+  flex:1; min-width:200px; background:var(--surface); color:var(--ink);
+  border:1px solid var(--line); border-radius:6px; padding:9px 12px; font-size:14px;
+}
+.toolbar input[type=search]:focus{outline:2px solid var(--accent); outline-offset:1px}
+.stats{display:flex; gap:8px; flex-wrap:wrap}
+.chip{
+  font:600 12.5px/1 var(--mono); padding:7px 10px; border-radius:99px;
+  background:var(--accent-soft); color:var(--accent); border:1px solid transparent;
+}
+.chip.warnchip{background:var(--warn-bg); color:var(--warn); border-color:var(--warn-line)}
+.tablebox{background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow-x:auto}
+table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
+th,td{padding:9px 14px; text-align:left; border-top:1px solid var(--line); white-space:nowrap}
+thead th{
+  border-top:none; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); background:var(--surface2); position:sticky; top:0;
+}
+th.sortable{cursor:pointer; user-select:none}
+th.sortable:hover{color:var(--ink)}
+th.sortable:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
+td.mat{font:700 14px var(--mono); color:var(--accent); width:1%}
+td.time{font:600 13.5px var(--mono)}
+td.time .eq{font-weight:400; color:var(--muted); margin-left:8px; font-size:12px}
+td.grade{color:var(--muted); font-size:13.5px; white-space:normal; min-width:120px}
+td.name{font-weight:600}
+tr.zero td{color:var(--muted)}
+tr.zero td.name{font-weight:400}
+tr.zero td.mat{color:var(--muted)}
+.empty{padding:22px 16px; color:var(--muted); text-align:center}
+.warnpanel{background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:8px; padding:14px 16px}
+.warnpanel .label{color:var(--warn)}
+.warnpanel ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column}
+.warnpanel li{
+  display:flex; justify-content:space-between; gap:16px; padding:6px 2px;
+  border-top:1px dashed var(--warn-line); font-size:14px;
+}
+.warnpanel li:first-child{border-top:none}
+.warnpanel li .t{font:600 13px var(--mono); color:var(--warn)}
+.warnpanel .none{color:var(--muted); font-size:13.5px}
+.misspanel .taglist{display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none}
+.misspanel .taglist li{
+  font:12.5px var(--mono); background:var(--surface2); border:1px solid var(--line);
+  border-radius:6px; padding:5px 9px; color:var(--muted);
+}
+.misspanel .taglist li b{color:var(--ink); font-weight:700}
+footer{color:var(--muted); font-size:12.5px}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Pointeuse — heures par matricule</h1>
+  <p>Colle la pointeuse à gauche : le tableau se met à jour tout seul. La liste des matricules ne se colle qu'une fois — elle reste enregistrée dans ce navigateur jusqu'à ce que tu la remplaces.</p>
+</header>
+
+<section class="inputs">
+  <div class="panel">
+    <label class="label" for="pointeuse">Pointeuse (à coller à chaque fois)</label>
+    <textarea id="pointeuse" spellcheck="false" placeholder="1	Kira Martinez	2 jours 14 heures&#10;2	Sam Boudj	2 jours 12 heures&#10;…"></textarea>
+    <p class="hint">Format : numéro, nom, durée (jours / heures / minutes / secondes).</p>
+  </div>
+  <div class="panel">
+    <label class="label" for="matricules">Liste des matricules (à coller quand elle change)</label>
+    <textarea id="matricules" spellcheck="false" placeholder="01 | Eren Ernesto Bueno Volpe -> General&#10;02 |&#10;…"></textarea>
+    <p class="hint">Les grades, émojis et lignes vides sont nettoyés automatiquement.</p>
+  </div>
+</section>
+
+<section>
+  <div class="toolbar" style="margin-bottom:12px">
+    <input type="search" id="search" placeholder="Rechercher un matricule ou un nom…" aria-label="Rechercher">
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" id="sortMat" tabindex="0">Matricule ▲▼</th>
+          <th>Nom</th>
+          <th class="sortable" id="sortTime" tabindex="0">Temps pointé ▲▼</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" hidden>Colle la pointeuse et la liste des matricules ci-dessus pour voir le tableau.</div>
+  </div>
+</section>
+
+<section class="warnpanel">
+  <span class="label">Pas dans la liste matricule — à vérifier <span id="warnCount"></span></span>
+  <ul id="warnList"></ul>
+</section>
+
+<section class="panel misspanel">
+  <span class="label">Matricules sans pointage trouvé <span id="missCount"></span></span>
+  <ul class="taglist" id="missList"></ul>
+</section>
+
+<section class="panel">
+  <label class="label" for="ignores">Personnes à ignorer (connues, hors liste matricule) <span id="ignCount"></span></label>
+  <textarea id="ignores" spellcheck="false" style="height:110px" placeholder="Un nom par ligne…"></textarea>
+  <p class="hint">Un nom par ligne. Ces personnes n'apparaîtront plus dans « à vérifier ». La liste reste enregistrée dans ce navigateur.</p>
+</section>
+
+<footer>Le rapprochement des noms ignore majuscules, accents, émojis, l'ordre prénom/nom et les petites fautes de frappe. En cas de doute, le nom part dans la case « à vérifier » plutôt que d'être attribué au mauvais matricule.</footer>
+</div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const taP = $("pointeuse"), taM = $("matricules"), taI = $("ignores");
+const IGNORES_VERSION = 2;
+const DEFAULT_IGNORES = `Sam Boudj
+polak belve
+Kendrick Bueno
+Buck Hiedler
+Juju Pierce
+Sr Costa
+Camilia Loera
+Julie Martins
+Zack Loera
+Vanessa Rich
+John Shepard
+Iris Boudj
+Alex Coelho
+James Rich-Forge`;
+
+/* ---------- normalisation des noms ---------- */
+const STOP = new Set(["sr","dr","mr","don","sra"]);
+function tokens(name){
+  return name.toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/[^\p{L}\p{N}\s]/gu," ")
+    .split(/\s+/)
+    .filter(t => t.length > 1 && !STOP.has(t));
+}
+function cleanName(raw){
+  return raw.replace(/[^\p{L}\p{N}\s.''’-]/gu," ").replace(/\s+/g," ").trim();
+}
+function lev(a,b){
+  if(a===b) return 0;
+  const m=a.length,n=b.length;
+  let prev=Array.from({length:n+1},(_,i)=>i);
+  for(let i=1;i<=m;i++){
+    const cur=[i];
+    for(let j=1;j<=n;j++)
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    prev=cur;
+  }
+  return prev[n];
+}
+function tokMatch(a,b){
+  if(a===b) return 2;               // exact
+  const min=Math.min(a.length,b.length);
+  const allow = min>=7 ? 2 : min>=4 ? 1 : 0;
+  return (allow && lev(a,b)<=allow) ? 1 : 0; // approx
+}
+
+/* ---------- parsing ---------- */
+function parseMatricules(text){
+  const out=[];
+  for(const line of text.split(/\r?\n/)){
+    const m=line.match(/^\s*(\d{1,3})\s*[|Il]\s*(.*)$/);
+    if(!m) continue;
+    const parts=m[2].split(/->|→/);
+    const name=cleanName(parts[0]||"");
+    if(!name) continue;
+    let grade=(parts[1]||"").replace(/:[^:\s]+:/g,"");
+    grade=cleanName(grade)||"—";
+    out.push({mat:m[1].padStart(2,"0"), name, grade, toks:tokens(name)});
+  }
+  return out;
+}
+const UNITS={jour:86400, heure:3600, minute:60, seconde:1};
+function parsePointeuse(text){
+  const out=[];
+  for(const line of text.split(/\r?\n/)){
+    const m=line.match(/^\s*\d+[\s.)-]+(.+?)[\s\t]+((?:\d+\s*(?:jours?|heures?|minutes?|secondes?)[\s,]*)+)$/i);
+    if(!m) continue;
+    const name=cleanName(m[1]);
+    if(!name) continue;
+    let sec=0;
+    for(const [,n,u] of m[2].matchAll(/(\d+)\s*(jour|heure|minute|seconde)/gi))
+      sec += parseInt(n,10)*UNITS[u.toLowerCase()];
+    out.push({name, sec, toks:tokens(name)});
+  }
+  return out;
+}
+
+/* ---------- rapprochement ---------- */
+function pairScore(A,B){
+  let hits=0, exact=0;
+  const used=new Set();
+  for(const t of A){
+    let best=0, bi=-1;
+    B.forEach((u,k)=>{
+      if(used.has(k)) return;
+      const s=tokMatch(t,u);
+      if(s>best){best=s; bi=k;}
+    });
+    if(best){hits++; if(best===2) exact++; used.add(bi);}
+  }
+  const ok = hits>=2 || (hits>=1 && (A.length===1 || B.length===1));
+  return {ok, hits, exact};
+}
+function matchLists(mats, points){
+  const cands=[];
+  mats.forEach((M,i)=>points.forEach((P,j)=>{
+    const r=pairScore(M.toks,P.toks);
+    if(r.ok) cands.push({i,j,score: 2*r.hits/(M.toks.length+P.toks.length) + r.exact*0.01 + r.hits*0.001});
+  }));
+  cands.sort((a,b)=>b.score-a.score);
+  const matByIdx=new Array(mats.length).fill(-1), usedP=new Set();
+  for(const c of cands){
+    if(matByIdx[c.i]!==-1 || usedP.has(c.j)) continue;
+    matByIdx[c.i]=c.j; usedP.add(c.j);
+  }
+  return {matByIdx, usedP};
+}
+
+/* ---------- affichage ---------- */
+function fmtTime(sec){
+  if(sec<=0) return "0";
+  if(sec<60) return sec+" s";
+  const j=Math.floor(sec/86400), h=Math.floor(sec%86400/3600), mn=Math.floor(sec%3600/60);
+  const parts=[];
+  if(j) parts.push(j+"j");
+  if(h||j) parts.push(h+"h");
+  if(mn && !j) parts.push(mn.toString().padStart(2,"0")+"m");
+  return parts.join(" ")||"0";
+}
+function eqHours(sec){
+  return sec>=86400 ? "= "+Math.round(sec/3600)+" h" : "";
+}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+let sortKey="time", sortDir=-1;   // défaut : temps décroissant
+let rows=[], unmatched=[], missing=[], ignoredSeen=0;
+
+function parseIgnores(text){
+  return text.split(/\r?\n/).map(cleanName).filter(Boolean).map(tokens).filter(t=>t.length);
+}
+function analyse(){
+  const mats=parseMatricules(taM.value);
+  const points=parsePointeuse(taP.value);
+  const ignores=parseIgnores(taI.value);
+  const {matByIdx, usedP}=matchLists(mats,points);
+  rows=mats.map((M,i)=>{
+    const P=matByIdx[i]>=0 ? points[matByIdx[i]] : null;
+    return {mat:M.mat, name:M.name, grade:M.grade, sec:P?P.sec:-1, pointName:P?P.name:null};
+  });
+  const rest=points.filter((_,j)=>!usedP.has(j));
+  unmatched=rest.filter(p=>!ignores.some(ig=>pairScore(ig,p.toks).ok)).sort((a,b)=>b.sec-a.sec);
+  ignoredSeen=rest.length-unmatched.length;
+  missing=rows.filter(r=>r.sec<0);
+  render();
+}
+
+function render(){
+  const q=tokens($("search").value).join(" ");
+  const shown=rows.filter(r=>r.sec>=0).filter(r=>{
+    if(!q) return true;
+    return r.mat.includes($("search").value.trim()) ||
+           tokens(r.name).join(" ").includes(q);
+  });
+  shown.sort((a,b)=>{
+    const d = sortKey==="mat" ? a.mat.localeCompare(b.mat,undefined,{numeric:true})
+                              : a.sec-b.sec;
+    return d*sortDir || a.mat.localeCompare(b.mat,undefined,{numeric:true});
+  });
+  $("tbody").innerHTML=shown.map(r=>
+    `<tr class="${r.sec===0?"zero":""}">
+      <td class="mat">${r.mat}</td>
+      <td class="name">${esc(r.name)}</td>
+      <td class="time">${fmtTime(r.sec)}${eqHours(r.sec)?`<span class="eq">${eqHours(r.sec)}</span>`:""}</td>
+      <td class="grade">${esc(r.grade)}</td>
+    </tr>`).join("");
+  $("emptyMsg").hidden = shown.length>0;
+  if(!shown.length) $("emptyMsg").textContent =
+    rows.length ? "Aucun résultat pour cette recherche." :
+    "Colle la pointeuse et la liste des matricules ci-dessus pour voir le tableau.";
+
+  const matched=rows.filter(r=>r.sec>=0).length;
+  $("stats").innerHTML=
+    `<span class="chip">${matched} matricules pointés</span>`+
+    (unmatched.length?`<span class="chip warnchip">${unmatched.length} à vérifier</span>`:"");
+
+  $("warnCount").textContent=unmatched.length?`(${unmatched.length})`:"";
+  $("warnList").innerHTML=unmatched.length
+    ? unmatched.map(p=>`<li><span>${esc(p.name)}</span><span class="t">${fmtTime(p.sec)}</span></li>`).join("")
+    : `<li class="none">Tout le monde dans la pointeuse a été retrouvé dans la liste des matricules.</li>`;
+
+  $("ignCount").textContent=ignoredSeen?`— ${ignoredSeen} masqué${ignoredSeen>1?"s":""} dans cette pointeuse`:"";
+
+  $("missCount").textContent=missing.length?`(${missing.length})`:"";
+  $("missList").innerHTML=missing.length
+    ? missing.map(r=>`<li><b>${r.mat}</b> ${esc(r.name)}</li>`).join("")
+    : `<li>Aucun — tous les matricules apparaissent dans la pointeuse.</li>`;
+}
+
+/* ---------- événements & persistance ---------- */
+let timer;
+function onInput(){
+  clearTimeout(timer);
+  timer=setTimeout(()=>{
+    try{
+      localStorage.setItem("pointeuse", taP.value);
+      localStorage.setItem("matricules", taM.value);
+      localStorage.setItem("ignores", taI.value);
+    }catch(e){}
+    analyse();
+  },250);
+}
+taP.addEventListener("input",onInput);
+taM.addEventListener("input",onInput);
+taI.addEventListener("input",onInput);
+$("search").addEventListener("input",render);
+function setSort(key){
+  if(sortKey===key) sortDir*=-1;
+  else {sortKey=key; sortDir=key==="time"?-1:1;}
+  render();
+}
+$("sortMat").addEventListener("click",()=>setSort("mat"));
+$("sortTime").addEventListener("click",()=>setSort("time"));
+[["sortMat","mat"],["sortTime","time"]].forEach(([id,k])=>
+  $(id).addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setSort(k);}}));
+
+try{
+  taP.value=localStorage.getItem("pointeuse")||"";
+  taM.value=localStorage.getItem("matricules")||"";
+  let ign=localStorage.getItem("ignores");
+  if(ign===null){
+    ign=DEFAULT_IGNORES;
+  }else if(parseInt(localStorage.getItem("ignoresVersion")||"1",10) < IGNORES_VERSION){
+    // nouvelle version des ignorés par défaut : on ajoute les noms manquants
+    const have=new Set(ign.split(/\r?\n/).map(l=>tokens(l).join(" ")).filter(Boolean));
+    const add=DEFAULT_IGNORES.split("\n").filter(l=>!have.has(tokens(l).join(" ")));
+    if(add.length) ign=(ign.trim()?ign.trim()+"\n":"")+add.join("\n");
+  }
+  taI.value=ign;
+  localStorage.setItem("ignores", ign);
+  localStorage.setItem("ignoresVersion", String(IGNORES_VERSION));
+}catch(e){ taI.value=DEFAULT_IGNORES; }
+analyse();
+</script>
