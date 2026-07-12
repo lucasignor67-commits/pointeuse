@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Classement service — Heures par matricule</title>
+<title>Matricules en service</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0B0B'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%2316C784' stroke-width='7'/%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-width='9' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M32 56 L50 40 L68 56'/%3E%3Cpath d='M32 72 L50 56 L68 72'/%3E%3C/g%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -18,12 +18,12 @@ body{
 .wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px; display:flex; flex-direction:column; gap:24px}
 header h1{margin:0; font-size:26px; font-weight:700; letter-spacing:-.01em; text-wrap:balance}
 header p{margin:6px 0 0; color:var(--muted); max-width:62ch}
+header a{color:var(--accent); font-size:13px; text-decoration:none; font-weight:600}
+header a:hover{text-decoration:underline}
 .label{
   display:block; font-size:11.5px; font-weight:600; letter-spacing:.08em;
   text-transform:uppercase; color:var(--muted); margin-bottom:8px;
 }
-.inputs{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-@media (max-width:760px){ .inputs{grid-template-columns:1fr} }
 .panel{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 16px}
 textarea{
   width:100%; height:170px; resize:vertical;
@@ -32,19 +32,8 @@ textarea{
   font:12.5px/1.5 var(--mono); white-space:pre;
 }
 textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent}
-input[type=url]{
-  width:100%; background:var(--surface2); color:var(--ink);
-  border:1px solid var(--line); border-radius:6px; padding:10px 12px;
-  font:12.5px/1.5 var(--mono);
-}
-input[type=url]:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent}
 .hint{margin:8px 0 0; font-size:12.5px; color:var(--muted)}
 .toolbar{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
-.toolbar input[type=search]{
-  flex:1; min-width:200px; background:var(--surface); color:var(--ink);
-  border:1px solid var(--line); border-radius:6px; padding:9px 12px; font-size:14px;
-}
-.toolbar input[type=search]:focus{outline:2px solid var(--accent); outline-offset:1px}
 .stats{display:flex; gap:8px; flex-wrap:wrap}
 .chip{
   font:600 12.5px/1 var(--mono); padding:7px 10px; border-radius:99px;
@@ -65,17 +54,10 @@ thead th{
   border-top:none; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
   color:var(--muted); background:var(--surface2); position:sticky; top:0;
 }
-th.sortable{cursor:pointer; user-select:none}
-th.sortable:hover{color:var(--ink)}
-th.sortable:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
 td.mat{font:700 14px var(--mono); color:var(--accent); width:1%}
-td.time{font:600 13.5px var(--mono)}
-td.time .eq{font-weight:400; color:var(--muted); margin-left:8px; font-size:12px}
+td.money{font:600 13.5px var(--mono)}
 td.grade{color:var(--muted); font-size:13.5px; white-space:normal; min-width:120px}
 td.name{font-weight:600}
-tr.zero td{color:var(--muted)}
-tr.zero td.name{font-weight:400}
-tr.zero td.mat{color:var(--muted)}
 .empty{padding:22px 16px; color:var(--muted); text-align:center}
 .warnpanel{background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:14px; padding:14px 16px}
 .warnpanel .label{color:var(--warn)}
@@ -87,64 +69,43 @@ tr.zero td.mat{color:var(--muted)}
 .warnpanel li:first-child{border-top:none}
 .warnpanel li .t{font:600 13px var(--mono); color:var(--warn)}
 .warnpanel .none{color:var(--muted); font-size:13.5px}
-.misspanel .taglist{display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none}
-.misspanel .taglist li{
-  font:12.5px var(--mono); background:var(--surface2); border:1px solid var(--line);
-  border-radius:6px; padding:5px 9px; color:var(--muted);
-}
-.misspanel .taglist li b{color:var(--ink); font-weight:700}
 footer{color:var(--muted); font-size:12.5px}
 </style>
 
 <div class="wrap">
 <header>
-  <h1>Classement service — heures par matricule</h1>
-  <p>Colle le classement service ci-dessous : le tableau se met à jour tout seul. La liste des matricules est intégrée à la page.</p>
-  <p style="margin-top:14px"><a href="voir-matricules-en-service.html" class="btn" style="display:inline-block; text-decoration:none; font-size:14px; padding:11px 18px">Voir les matricules en service →</a></p>
+  <h1>Matricules en service</h1>
+  <p>Colle la liste ci-dessous (nom, puis ligne « Oui / Non ») : les « Oui » sont en service. La liste des matricules est intégrée à la page.</p>
+  <p style="margin-top:14px"><a href="index.html" class="btn" style="display:inline-block; text-decoration:none; font-size:14px; padding:11px 18px">Voir les heures par matricule →</a></p>
 </header>
 
 <section class="panel">
-  <label class="label" for="pointeuse">Classement service (à coller à chaque fois)</label>
-  <textarea id="pointeuse" spellcheck="false" placeholder="1	Kira Martinez	2 jours 14 heures&#10;2	Sam Boudj	2 jours 12 heures&#10;…"></textarea>
+  <label class="label" for="paste">Liste à coller</label>
+  <textarea id="paste" spellcheck="false" placeholder="Sam Boudj&#10;Oui	490000$&#10;Zed Alvarez&#10;Non	170000$&#10;…"></textarea>
   <p class="hint" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
-    <button id="clearPaste" class="btn" type="button">🗑 Vider le classement</button>
-    <span>Format : numéro, nom, durée (jours / heures / minutes / secondes). La liste des matricules est intégrée à la page.</span>
+    <button id="clearPaste" class="btn" type="button">🗑 Vider la liste</button>
+    <span>Une ligne avec le nom, la suivante avec Oui ou Non (et l'argent).</span>
   </p>
-  <textarea id="matricules" hidden></textarea>
 </section>
 
 <section>
   <div class="toolbar" style="margin-bottom:12px">
-    <input type="search" id="search" placeholder="Rechercher un matricule ou un nom…" aria-label="Rechercher">
     <div class="stats" id="stats"></div>
-    <button id="copyDiscord" class="btn" type="button">📋 Copier pour Discord</button>
-    <button id="copyExcel" class="btn" type="button">📋 Copier pour Excel</button>
-    <button id="sendSheet" class="btn" type="button">📤 Mettre à jour le Google Sheet</button>
   </div>
   <div class="tablebox">
     <table>
       <thead>
-        <tr>
-          <th class="sortable" id="sortMat" tabindex="0">Matricule ▲▼</th>
-          <th>Nom</th>
-          <th class="sortable" id="sortTime" tabindex="0">Temps de service ▲▼</th>
-          <th>Grade</th>
-        </tr>
+        <tr><th>Matricule</th><th>Nom</th><th>Grade</th></tr>
       </thead>
       <tbody id="tbody"></tbody>
     </table>
-    <div class="empty" id="emptyMsg" hidden>Colle le classement service ci-dessus pour voir le tableau.</div>
+    <div class="empty" id="emptyMsg" hidden>Colle la liste ci-dessus pour voir qui est en service.</div>
   </div>
 </section>
 
 <section class="warnpanel">
-  <span class="label">Pas dans la liste matricule — à vérifier <span id="warnCount"></span></span>
+  <span class="label">En service mais pas dans la liste matricule — à vérifier <span id="warnCount"></span></span>
   <ul id="warnList"></ul>
-</section>
-
-<section class="panel misspanel">
-  <span class="label">Matricules absents du classement <span id="missCount"></span></span>
-  <ul class="taglist" id="missList"></ul>
 </section>
 
 <section class="panel">
@@ -153,19 +114,13 @@ footer{color:var(--muted); font-size:12.5px}
   <p class="hint">Un nom par ligne. Ces personnes n'apparaîtront plus dans « à vérifier ». La liste reste enregistrée dans ce navigateur.</p>
 </section>
 
-<section class="panel">
-  <label class="label" for="gsUrl">Google Sheet — adresse du script (réglage, une seule fois)</label>
-  <input id="gsUrl" type="url" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec">
-  <p class="hint">Colle ici l'adresse « Application Web » de ton script Google (mode d'emploi dans google-sheet-mode-demploi.txt). Elle reste enregistrée dans ce navigateur.</p>
-</section>
-
 <footer>Le rapprochement des noms ignore majuscules, accents, émojis, l'ordre prénom/nom et les petites fautes de frappe. En cas de doute, le nom part dans la case « à vérifier » plutôt que d'être attribué au mauvais matricule.</footer>
 </div>
 
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
-const taP = $("pointeuse"), taM = $("matricules"), taI = $("ignores");
+const taP = $("paste"), taI = $("ignores");
 const IGNORES_VERSION = 2;
 const DEFAULT_IGNORES = `Sam Boudj
 polak belve
@@ -297,10 +252,25 @@ function lev(a,b){
   return prev[n];
 }
 function tokMatch(a,b){
-  if(a===b) return 2;               // exact
+  if(a===b) return 2;
   const min=Math.min(a.length,b.length);
   const allow = min>=7 ? 2 : min>=4 ? 1 : 0;
-  return (allow && lev(a,b)<=allow) ? 1 : 0; // approx
+  return (allow && lev(a,b)<=allow) ? 1 : 0;
+}
+function pairScore(A,B){
+  let hits=0, exact=0;
+  const used=new Set();
+  for(const t of A){
+    let best=0, bi=-1;
+    B.forEach((u,k)=>{
+      if(used.has(k)) return;
+      const s=tokMatch(t,u);
+      if(s>best){best=s; bi=k;}
+    });
+    if(best){hits++; if(best===2) exact++; used.add(bi);}
+  }
+  const ok = hits>=2 || (hits>=1 && (A.length===1 || B.length===1));
+  return {ok, hits, exact};
 }
 
 /* ---------- parsing ---------- */
@@ -318,41 +288,45 @@ function parseMatricules(text){
   }
   return out;
 }
-const UNITS={jour:86400, heure:3600, minute:60, seconde:1};
-function parsePointeuse(text){
+function parseService(text){
   const out=[];
-  for(const line of text.split(/\r?\n/)){
-    const m=line.match(/^\s*\d+[\s.)-]+(.+?)[\s\t]+((?:\d+\s*(?:jours?|heures?|minutes?|secondes?)[\s,]*)+)$/i);
-    if(!m) continue;
-    const name=cleanName(m[1]);
-    if(!name) continue;
-    let sec=0;
-    for(const [,n,u] of m[2].matchAll(/(\d+)\s*(jour|heure|minute|seconde)/gi))
-      sec += parseInt(n,10)*UNITS[u.toLowerCase()];
-    out.push({name, sec, toks:tokens(name)});
+  let pending=null;
+  for(const raw of text.split(/\r?\n/)){
+    const line=raw.trim();
+    if(!line) continue;
+    const st=line.match(/^(oui|non)\b[\s\t]*(.*)$/i);
+    if(st && pending){
+      const money=(st[2].match(/([\d\s.,]+)\s*\$/)||[])[1];
+      out.push({
+        name:pending, toks:tokens(pending),
+        enService:/^oui$/i.test(st[1]),
+        money: money ? parseInt(money.replace(/[^\d]/g,""),10)||0 : 0
+      });
+      pending=null;
+    }else if(!st){
+      pending=cleanName(line)||null;
+    }
   }
   return out;
 }
-
-/* ---------- rapprochement ---------- */
-function pairScore(A,B){
-  let hits=0, exact=0;
-  const used=new Set();
-  for(const t of A){
-    let best=0, bi=-1;
-    B.forEach((u,k)=>{
-      if(used.has(k)) return;
-      const s=tokMatch(t,u);
-      if(s>best){best=s; bi=k;}
-    });
-    if(best){hits++; if(best===2) exact++; used.add(bi);}
-  }
-  const ok = hits>=2 || (hits>=1 && (A.length===1 || B.length===1));
-  return {ok, hits, exact};
+function parseIgnores(text){
+  return text.split(/\r?\n/).map(cleanName).filter(Boolean).map(tokens).filter(t=>t.length);
 }
-function matchLists(mats, points){
+
+/* ---------- analyse ---------- */
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function fmtMoney(n){ return n.toLocaleString("fr-FR")+" $"; }
+
+let enService=[], unmatched=[], ignoredSeen=0, totalOui=0;
+
+function analyse(){
+  const mats=parseMatricules(DEFAULT_MATRICULES);
+  const people=parseService(taP.value).filter(p=>p.enService);
+  totalOui=people.length;
+  const ignores=parseIgnores(taI.value);
+
   const cands=[];
-  mats.forEach((M,i)=>points.forEach((P,j)=>{
+  mats.forEach((M,i)=>people.forEach((P,j)=>{
     const r=pairScore(M.toks,P.toks);
     if(r.ok) cands.push({i,j,score: 2*r.hits/(M.toks.length+P.toks.length) + r.exact*0.01 + r.hits*0.001});
   }));
@@ -362,190 +336,44 @@ function matchLists(mats, points){
     if(matByIdx[c.i]!==-1 || usedP.has(c.j)) continue;
     matByIdx[c.i]=c.j; usedP.add(c.j);
   }
-  return {matByIdx, usedP};
-}
 
-/* ---------- affichage ---------- */
-function fmtTime(sec){
-  if(sec<=0) return "0";
-  if(sec<60) return sec+" s";
-  const j=Math.floor(sec/86400), h=Math.floor(sec%86400/3600), mn=Math.floor(sec%3600/60);
-  const parts=[];
-  if(j) parts.push(j+"j");
-  if(h||j) parts.push(h+"h");
-  if(mn && !j) parts.push(mn.toString().padStart(2,"0")+"m");
-  return parts.join(" ")||"0";
-}
-function eqHours(sec){
-  return sec>=86400 ? "= "+Math.round(sec/3600)+" h" : "";
-}
-function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-
-let sortKey="time", sortDir=-1;   // défaut : temps décroissant
-let rows=[], unmatched=[], missing=[], ignoredSeen=0, pointsCount=0;
-
-function parseIgnores(text){
-  return text.split(/\r?\n/).map(cleanName).filter(Boolean).map(tokens).filter(t=>t.length);
-}
-function analyse(){
-  const mats=parseMatricules(taM.value);
-  const points=parsePointeuse(taP.value);
-  pointsCount=points.length;
-  const ignores=parseIgnores(taI.value);
-  const {matByIdx, usedP}=matchLists(mats,points);
-  rows=mats.map((M,i)=>{
-    const P=matByIdx[i]>=0 ? points[matByIdx[i]] : null;
-    return {mat:M.mat, name:M.name, grade:M.grade, sec:P?P.sec:-1, pointName:P?P.name:null};
+  enService=[];
+  mats.forEach((M,i)=>{
+    if(matByIdx[i]>=0){
+      enService.push({mat:M.mat, name:M.name, grade:M.grade});
+    }
   });
-  const rest=points.filter((_,j)=>!usedP.has(j));
-  unmatched=rest.filter(p=>!ignores.some(ig=>pairScore(ig,p.toks).ok)).sort((a,b)=>b.sec-a.sec);
+  enService.sort((a,b)=>a.mat.localeCompare(b.mat,undefined,{numeric:true}));
+
+  const rest=people.filter((_,j)=>!usedP.has(j));
+  unmatched=rest.filter(p=>!ignores.some(ig=>pairScore(ig,p.toks).ok)).sort((a,b)=>b.money-a.money);
   ignoredSeen=rest.length-unmatched.length;
-  missing=rows.filter(r=>r.sec<0);
   render();
 }
 
-function computeShown(){
-  const q=tokens($("search").value).join(" ");
-  const shown=rows.filter(r=>r.sec>=0).filter(r=>{
-    if(!q) return true;
-    return r.mat.includes($("search").value.trim()) ||
-           tokens(r.name).join(" ").includes(q);
-  });
-  shown.sort((a,b)=>{
-    const d = sortKey==="mat" ? a.mat.localeCompare(b.mat,undefined,{numeric:true})
-                              : a.sec-b.sec;
-    return d*sortDir || a.mat.localeCompare(b.mat,undefined,{numeric:true});
-  });
-  return shown;
-}
 function render(){
-  const shown=computeShown();
-  $("tbody").innerHTML=shown.map(r=>
-    `<tr class="${r.sec===0?"zero":""}">
+  $("tbody").innerHTML=enService.map(r=>
+    `<tr>
       <td class="mat">${r.mat}</td>
       <td class="name">${esc(r.name)}</td>
-      <td class="time">${fmtTime(r.sec)}${eqHours(r.sec)?`<span class="eq">${eqHours(r.sec)}</span>`:""}</td>
       <td class="grade">${esc(r.grade)}</td>
     </tr>`).join("");
-  $("emptyMsg").hidden = shown.length>0;
-  if(!shown.length) $("emptyMsg").textContent =
-    !pointsCount ? "Colle le classement service ci-dessus pour voir les temps — la liste des matricules est déjà chargée." :
-    rows.length ? "Aucun résultat pour cette recherche." :
-    "Aucun matricule reconnu dans la liste de droite.";
+  $("emptyMsg").hidden = enService.length>0;
+  if(!enService.length) $("emptyMsg").textContent =
+    !totalOui ? "Colle la liste ci-dessus pour voir qui est en service."
+              : "Aucun matricule reconnu parmi les personnes en service.";
 
-  const matched=rows.filter(r=>r.sec>=0).length;
   $("stats").innerHTML=
-    `<span class="chip">${matched} matricules classés</span>`+
+    `<span class="chip">${enService.length} matricule${enService.length>1?"s":""} en service</span>`+
     (unmatched.length?`<span class="chip warnchip">${unmatched.length} à vérifier</span>`:"");
 
   $("warnCount").textContent=unmatched.length?`(${unmatched.length})`:"";
   $("warnList").innerHTML=unmatched.length
-    ? unmatched.map(p=>`<li><span>${esc(p.name)}</span><span class="t">${fmtTime(p.sec)}</span></li>`).join("")
-    : `<li class="none">Tout le monde dans le classement a été retrouvé dans la liste des matricules.</li>`;
+    ? unmatched.map(p=>`<li><span>${esc(p.name)}</span><span class="t">${fmtMoney(p.money)}</span></li>`).join("")
+    : `<li class="none">Personne en service inconnu — tout le monde est identifié.</li>`;
 
-  $("ignCount").textContent=ignoredSeen?`— ${ignoredSeen} masqué${ignoredSeen>1?"s":""} dans ce classement`:"";
-
-  $("missCount").textContent=missing.length?`(${missing.length})`:"";
-  $("missList").innerHTML=missing.length
-    ? missing.map(r=>`<li><b>${r.mat}</b> ${esc(r.name)}</li>`).join("")
-    : `<li>Aucun — tous les matricules apparaissent dans le classement.</li>`;
+  $("ignCount").textContent=ignoredSeen?`— ${ignoredSeen} masqué${ignoredSeen>1?"s":""} dans cette liste`:"";
 }
-
-/* ---------- exports ---------- */
-function fmtHM(sec){
-  const h=Math.floor(sec/3600), m=Math.floor(sec%3600/60);
-  return h+"h"+String(m).padStart(2,"0");
-}
-function discordText(){
-  const shown=computeShown();
-  const lines=shown.map(r=>{
-    let n=r.name;
-    if(n.length>20) n=n.slice(0,19)+"…";
-    return r.mat+"  "+n.padEnd(20)+" "+fmtHM(r.sec);
-  });
-  return "```\nMAT NOM                  TEMPS\n"+lines.join("\n")+"\n```";
-}
-function excelText(){
-  // tous les matricules de 01 à 90 (ou plus si la liste va plus loin),
-  // avec / pour les matricules sans personne
-  const byMat={};
-  let maxMat=90;
-  rows.forEach(r=>{
-    const n=parseInt(r.mat,10);
-    byMat[n]=r;
-    if(n>maxMat) maxMat=n;
-  });
-  const lines=["Matricule\tNom\tTemps"];
-  for(let i=1;i<=maxMat;i++){
-    const r=byMat[i];
-    if(!r) lines.push([String(i).padStart(2,"0"),"/","/"].join("\t"));
-    else lines.push([r.mat, r.name, r.sec>=0?fmtTime(r.sec):"/"].join("\t"));
-  }
-  return lines.join("\n");
-}
-function bindCopy(id, makeText){
-  const btn=$(id), orig=btn.textContent;
-  btn.addEventListener("click", async ()=>{
-    const txt=makeText();
-    let ok=false;
-    try{ await navigator.clipboard.writeText(txt); ok=true; }
-    catch(e){
-      const ta=document.createElement("textarea");
-      ta.value=txt; ta.style.cssText="position:fixed;opacity:0";
-      document.body.appendChild(ta); ta.select();
-      try{ ok=document.execCommand("copy"); }catch(_){}
-      ta.remove();
-    }
-    btn.textContent = ok ? "✓ Copié !" : "Échec — copie bloquée";
-    setTimeout(()=>{btn.textContent=orig;},1800);
-  });
-}
-bindCopy("copyDiscord", discordText);
-bindCopy("copyExcel", excelText);
-
-/* ---------- envoi vers Google Sheet ---------- */
-const gsInput=$("gsUrl");
-try{ gsInput.value=localStorage.getItem("gsUrl")||""; }catch(e){}
-gsInput.addEventListener("input",()=>{ try{ localStorage.setItem("gsUrl",gsInput.value.trim()); }catch(e){} });
-$("sendSheet").addEventListener("click", async ()=>{
-  const btn=$("sendSheet"), orig="📤 Mettre à jour le Google Sheet";
-  const url=(gsInput.value||"").trim();
-  if(!url){
-    btn.textContent="⚠ Renseigne d'abord l'adresse du script (en bas de page)";
-    gsInput.focus();
-    setTimeout(()=>{btn.textContent=orig;},3500);
-    return;
-  }
-  btn.disabled=true;
-  btn.textContent="⏳ Envoi en cours…";
-  let msg;
-  try{
-    const res=await fetch(url,{
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:excelText()
-    });
-    const j=await res.json().catch(()=>null);
-    msg = (j&&j.ok) ? `✓ Google Sheet mis à jour (${j.rows} lignes) !`
-        : res.ok ? "✓ Envoyé !" : "Échec — vérifie l'adresse du script";
-  }catch(e){
-    // certains navigateurs bloquent la lecture de la réponse : envoi aveugle en secours
-    try{
-      await fetch(url,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:excelText()});
-      msg="✓ Envoyé (vérifie le Sheet)";
-    }catch(_){ msg="Échec — vérifie l'adresse du script et ta connexion"; }
-  }
-  btn.disabled=false;
-  btn.textContent=msg;
-  setTimeout(()=>{btn.textContent=orig;},5000);
-});
-
-// si un matricules.txt est présent à côté de la page (usage local),
-// il remplace la liste intégrée
-fetch("matricules.txt",{cache:"no-store"})
-  .then(r=>r.ok?r.text():null)
-  .then(t=>{ if(t && t.trim()){ taM.value=t; analyse(); } })
-  .catch(()=>{});
 
 /* ---------- événements & persistance ---------- */
 let timer;
@@ -553,8 +381,8 @@ function onInput(){
   clearTimeout(timer);
   timer=setTimeout(()=>{
     try{
-      localStorage.setItem("pointeuse", taP.value);
-      localStorage.setItem("ignores", taI.value);
+      localStorage.setItem("svcPaste", taP.value);
+      localStorage.setItem("svcIgnores", taI.value);
     }catch(e){}
     analyse();
   },250);
@@ -563,38 +391,24 @@ taP.addEventListener("input",onInput);
 taI.addEventListener("input",onInput);
 $("clearPaste").addEventListener("click",()=>{
   taP.value="";
-  try{ localStorage.setItem("pointeuse",""); }catch(e){}
+  try{ localStorage.setItem("svcPaste",""); }catch(e){}
   analyse();
   taP.focus();
 });
-$("search").addEventListener("input",render);
-function setSort(key){
-  if(sortKey===key) sortDir*=-1;
-  else {sortKey=key; sortDir=key==="time"?-1:1;}
-  render();
-}
-$("sortMat").addEventListener("click",()=>setSort("mat"));
-$("sortTime").addEventListener("click",()=>setSort("time"));
-[["sortMat","mat"],["sortTime","time"]].forEach(([id,k])=>
-  $(id).addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setSort(k);}}));
 
-// la liste des matricules n'est plus modifiable sur la page :
-// c'est toujours celle intégrée ici (mise à jour via matricules.txt)
-taM.value=DEFAULT_MATRICULES;
 try{
-  taP.value=localStorage.getItem("pointeuse")||"";
-  let ign=localStorage.getItem("ignores");
+  taP.value=localStorage.getItem("svcPaste")||"";
+  let ign=localStorage.getItem("svcIgnores");
   if(ign===null){
     ign=DEFAULT_IGNORES;
-  }else if(parseInt(localStorage.getItem("ignoresVersion")||"1",10) < IGNORES_VERSION){
-    // nouvelle version des ignorés par défaut : on ajoute les noms manquants
+  }else if(parseInt(localStorage.getItem("svcIgnoresVersion")||"1",10) < IGNORES_VERSION){
     const have=new Set(ign.split(/\r?\n/).map(l=>tokens(l).join(" ")).filter(Boolean));
     const add=DEFAULT_IGNORES.split("\n").filter(l=>!have.has(tokens(l).join(" ")));
     if(add.length) ign=(ign.trim()?ign.trim()+"\n":"")+add.join("\n");
   }
   taI.value=ign;
-  localStorage.setItem("ignores", ign);
-  localStorage.setItem("ignoresVersion", String(IGNORES_VERSION));
+  localStorage.setItem("svcIgnores", ign);
+  localStorage.setItem("svcIgnoresVersion", String(IGNORES_VERSION));
 }catch(e){ taI.value=DEFAULT_IGNORES; }
 analyse();
 </script>
