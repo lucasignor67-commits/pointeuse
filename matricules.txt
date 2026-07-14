@@ -1,90 +1,91 @@
-01  | Eren Ernesto Bueno Volpe            ->  General  :Generaladjunto:
-02 |
-03 | Sr. Hermès A. Marks Cluse           ->  General  :Generaladjunto:
-04 | Frost Alex 🚁                                   ->  Alfarez Primero en Test
-05 | Teixeira Maxime ⚓                        ->  Soldado  :Soldado:
-06 | Emax Jackson 🪖                           ->  Capitan Primero  :CapitainePrimero:
-07 | Marc Bueno ⚓                                -> Sargento Primero  :Sergento_Primero:
-08 | Rio Ochoa ▫️                                   ->Recluta
-09 | Nueve Ramirez ⚓                          -> Comandante
-10 | Nino Ramirez ⚓                              -> Capitan Segundo  :CapitaineSegundo:
-11 | Max Emerson 🚁                               -> Capitan Segundo  :CapitaineSegundo:
-12 | Zarouk Kekya ▫️                              ->Recluta
-13 | Solís Grenadine ⚓                          -> Alfarez Segundo en Test
-14 | Carlo Avarro 🚁                                -> Teniente  :Teniente:
-15 | Looping Lee 🪖                                 -> Capitan Primero  :CapitainePrimero:
-16 | Esmée Bueno ⚓                              -> Coronel  :Coronel~1:
-17 |  Gul Carlos 🪖                                    -> Cabo en Test :Cabo:
-18 | Benaziz Hahmza 🪖                         -> Recluta
-19 | Delorbe cobra ▫️                             -> Recluta
-20 | Martinez Kira 🚁                             -> Sergento en Test  :Sergento:
-21
-22 |
-23 | Roméro Hiedler 🪖                         ->  Coronel en Test  :Coronel~1:
-24 |
-25 | Jan Nowak ▫️                                  -> Recluta
-26 |  Garcia Neto ▫️                              -> Soldado Primera :Soldado_Primera:
+01  | Eren Ernesto Bueno Volpe            ->  General  :General: 
+02 | 
+03 | 
+04 | Frost Alex 🚁                                   ->  Teniente en test :Teniente: 
+05 | Teixeira Maxime ⚓                        ->  Soldado  :Soldado: 
+06 | Emax Jackson 🪖                           ->  Capitan Primero  :CapitanPrimero: 
+07 | Marc Bueno ⚓                                -> Sargento Primero  :CapitanPrimero:
+08 | Rio Ochoa ▫️                                   -> Recluta :Recluta: 
+09 | Nueve Ramirez ⚓                          -> Comandante :Commandante~1: 
+10 | Nino Ramirez ⚓                              -> Capitan Segundo :CapitanSegundo: 
+11 | Max Emerson 🚁                               -> Capitan Segundo :CapitanSegundo:
+12 | Zarouk Kekya ▫️                              -> Recluta :Recluta: 
+13 | Solís Grenadine ⚓                          -> Alfarez Segundo en Test :AlfarezSegundo: 
+14 | Carlo Avarro 🚁                                -> Teniente :Teniente: 
+15 | Looping Lee 🪖                                 -> Teniente Coronel :TenienteCoronel: 
+16 | Esmée Bueno ⚓                              -> Coronel :Coronel~1: 
+17 |  Gul Carlos 🪖                                    -> Sargento Primero :SargentoPrimero: 
+18 | 
+19 | Brian Peterson 🚁                            -> Recluta :Recluta: 
+20 | Martinez Kira 🚁                             -> Sergento en Test :Sargento: 
+21 | kyle Peterson ▫️                              -> Recluta :Recluta: 
+22 | Alvaro cortes 🚁                               -> Recluta :Recluta: 
+23 | Roméro Hiedler 🪖                         ->  Coronel en Test :Coronel~1: 
+24 | 
+25 | Jan Nowak ▫️                                  -> Recluta :Recluta: 
+26 | 
 27 |
-28 | Vodjio Torres ⚓                              -> Sergento  :Sergento:
-29 | Tohands Aylan  ▫️                          -> Recluta
-30 |
-31  | Wolf Smith Nolan 🚁                     -> Saldado  :Soldado:
+28 | Vodjio Torres ⚓                              -> Alfarez Segundo en Test :AlfarezSegundo: 
+29 |
+30 | 
+31  | Wolf Smith Nolan 🚁                     -> Cabo :Cabo: 
 32 |
-33 | Larzize Timot ⚓                            -> Recluta
-34 | Zayne Alvarez ⚓                            -> Alfuarez Segundo en Test
-35 | Zed Alvarez 🪖                                -> Alfarez Primero en Test
-36 | Sylencio Hiedler ▫️                       -> Recluta
-37 | jhonn Sléman ▫️                             -> Recluta
-38 | Alvaro Owen ▫️                              -> Recluta
-39 | Meylan Chihab 🪖                         -> Sergento Primero  :Sergento_Primero:
+33 | Hamza Bouzid ⚓                           -> Recluta :Recluta: 
+34 | Zayne Alvarez ⚓                            -> Teniente Coronel :TenienteCoronel: 
+35 | Zed Alvarez 🚁                                -> Teniente Coronel :TenienteCoronel:
+36 | 
+37 | jhonn Sléman ▫️                             -> Recluta :Recluta: 
+38 | Alvaro Owen ⚓                              -> Soldado :Soldado: 
+39 | Meylan Chihab 🪖                         -> Alfarez Segundo en Test :AlfarezSegundo: 
 40 |
 41  |
-42 | Hamilton Andy ⚓                         -> Soldado  :Soldado:
-43 | Laponne Mattéo 🚁                      -> Coronel  :Coronel~1:
-44 | Sergio Artys 🚁                              -> Teniente :Teniente:
-45  | Taylor Yassinn 🪖                         -> Recluta
-46 |  Tom KIRKMANT ▫️                      -> Recluta
-47 | Nass Bouzid  ▫️                              -> Recluta
-48 | Alvez Keith Cortez 🪖                  -> Soldado  :Soldado:
-49 |
-50 | Tony Garcia Galvino 🪖                -> Alfarez Primero
-51  | Diego Ramirez ▫️                          -> Recluta
-52 | Gimenez Clou 🪖                           -> Soldado  :Soldado:
-53 | Frost Thommas ⚓                       -> Soldado  :Soldado:
-54 |
+42 | Hamilton Andy ⚓                         -> Soldado :Soldado: 
+43 | Laponne Mattéo 🚁                      -> Coronel :Coronel~1: 
+44 | Sergio Artys 🚁                              -> Teniente :Teniente: 
+45  | 
+46 |  Tom KIRKMANT ▫️                      -> Recluta :Recluta: 
+47 | Nass Bouzid  ▫️                              -> Recluta :Recluta:
+48 | 
+49 | 
+50 | Tony Garcia Galvino 🪖                -> Teniente en Test :Teniente: 
+51  | Diego Ramirez ▫️                          -> Recluta :Recluta:
+52 | Gimenez Clou 🪖                           -> Soldado :Soldado: 
+53 | Frost Thommas ⚓                       -> Soldado :Soldado: 
+54 | 
 55 |
-56 |
-57 | Thiago Rashford Muani ▫️         -> Soldado  :Soldado:
-58 | Souleymane Mané ▫️                  -> Recluta
-59 | Gianni Lampuza 🚁                       -> Cabo  :Cabo:
-60 |
-61 | Alvaro cortes ▫️                               -> Recluta
-62 | Valesco Riley 🪖                              -> Alfarez Primero
-63 |
-64 | Lopesse karl  ▫️                              -> Recluta
-65 | Wolf Mike ⚓                                    -> Alfarez Primero
-66 | Hakim Mahgoumgo ⚓                 -> Recluta
-67 | james bobby ▫️                              -> Recluta
-68 | Rivera Emilio 🪖                             -> Alfarez Primero en Test
-69 |
-70 | Paqueta Fernandes Alvarez 🚁 -> Recluta
-71  | Mathis Luke ▫️                                 -> Recluta
+56 | 
+57 | Thiago Rashford Muani ⚓         -> Soldado :Soldado: 
+58 | Souleymane Mané ▫️                  -> Recluta :Recluta:
+59 | Gianni Lampuza 🚁                       -> Sargento :Sargento: 
+60 | 
+61 | 
+62 | Valesco Riley 🪖                              -> Alfarez Primero :AlfarezPrimero: 
+63 | 
+64 | Lopesse karl  ▫️                              -> Recluta :Recluta: 
+65 | Wolf Mike ⚓                                    -> Alfarez Primero :AlfarezPrimero: 
+66 | Hakim Mahgoumgo ⚓                 -> Soldado :Soldado: 
+67 | james bobby ▫️                              -> Recluta :Recluta: 
+68 | Rivera Emilio 🪖                             -> Alfarez Primero en Test :AlfarezPrimero: 
+69 | Clément Landy ▫️                -> Recluta :Recluta:
+70 | Paqueta Fernandes Alvarez 🚁 -> Soldado :Soldado:
+71  | Mathis Luke ▫️                                 -> Recluta :Recluta:
 72 | Clark WHITER 🚁                            -> Soldado :Soldado:
-73 | Jonas Johnson ▫️                          -> Soldado  :Soldado:
-74 | Lucky Luke ▫️                                   -> Recluta
-75 |
-76 I James jack ▫️                                   -> Recluta
-77 | livio santos 🪖                                   -> Soldado Primera  :Soldado_Primera:
-78 |
-79 | Seif king  🪖                                      -> Recluta
-80 | Eren Kohlman ▫️                            -> Recluta
+73 | 
+74 | Lucky Luke 🪖                                   -> Soldado :Soldado:
+75 | 
+76 I James jack ▫️                                   -> Recluta :Recluta:
+77 | livio santos 🪖                                   -> Soldado Primera :SoldadoPrimera: 
+78 | 
+79 | 
+80 | Eren Kohlman ▫️                            -> Recluta :Recluta: 
 81  |
-82 | Bernardo Wedson 🚁                     -> Recluta
-83 | Taylor Garcia 🪖                              -> Recluta
+82 | Bernardo Wedson 🚁                     -> Soldado Primera :SoldadoPrimera: 
+83 | Taylor Garcia 🪖                              -> Recluta :Recluta: 
 84 |
-85 | Timy DangBong Owen ⚓             -> Cabo  :Cabo:
-86 |
-87 | Félin Tower▫️                                   -> Recluta
-88 | Fox Nina ⚓                                      ﻿ -> Sergento Primero  :Sergento_Primero:
-89 |
-90| Freya Myers ▫️                                 -> Recluta
+85 | 
+86 | 
+87 | Félin Tower▫️                                   -> Recluta :Recluta:
+88 | Fox Nina ⚓                                      ﻿ -> Sergento Primero :SargentoPrimero: 
+89 | Jason Larkay 🪖                              -> Recluta :Recluta:
+
+90 | Freya Myers ▫️                                 -> Recluta :Recluta:
