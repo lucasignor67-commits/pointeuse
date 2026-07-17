@@ -1,4 +1,4 @@
-01 | Eren Ernesto Bueno Volpe            ->  General  :General: :ResponsableMarine: :ResponsableTerrestre: :ResponsableFuerza: 
+01  | Eren Ernesto Bueno Volpe            ->  General  :General: :ResponsableMarine: :ResponsableTerrestre: :ResponsableFuerza: 
 02 | 
 03 | 
 04 | Frost Alex 🚁                                   ->  Teniente en test :Teniente: :AspirantFuerza: 
@@ -28,7 +28,7 @@
 28 | Vodjio Torres ⚓                              -> Alfarez Segundo en Test :AlfarezSegundo: :AspirantMarine: 
 29 | Aylan thoands ▫️                           -> Recluta :Recluta: 
 30 | Damon Peterson ▫️                      ->*** Recluta :Recluta: 
-31 | Wolf Smith Nolan 🚁                     -> Cabo :Cabo: 
+31  | Wolf Smith Nolan 🚁                     -> Cabo :Cabo: 
 32 |
 33 | Hamza Bouzid ⚓                           -> Recluta :Recluta: 
 34 | Zayne Alvarez ⚓                            -> Teniente Coronel :TenienteCoronel: :AdjointMarine: 
@@ -38,17 +38,17 @@
 38 | Alvaro Owen ⚓                              -> Soldado :Soldado: 
 39 | Meylan Chihab 🪖                         -> Alfarez Segundo en Test :AlfarezSegundo: :AspirantTerrestre: 
 40 |
-41 |
+41  |
 42 | Hamilton Andy ⚓                         -> Soldado :Soldado: 
 43 | Laponne Mattéo 🚁                      -> Coronel :Coronel~1: :ResponsableFuerza: 
 44 | Sergio Artys 🚁                              -> Teniente :Teniente: 
-45 | 
+45  | 
 46 |  Tom KIRKMANT ▫️                      -> Recluta :Recluta: 
 47 | Nass Bouzid  ▫️                              -> Recluta :Recluta:
 48 | 
 49 | 
 50 | Tony Garcia Galvino 🪖                -> Teniente en Test :Teniente: 
-51 | Diego Ramirez ▫️                          -> Recluta :Recluta:
+51  | Diego Ramirez ▫️                          -> Recluta :Recluta:
 52 | 
 53 | Frost Thommas ⚓                       -> Soldado :Soldado: 
 54 |
@@ -68,7 +68,7 @@
 68 | Rivera Emilio 🪖                             -> Alfarez Primero en Test :AlfarezPrimero: 
 69 | Clément Landy ▫️                -> Recluta :Recluta:
 70 | Paqueta Fernandes Alvarez 🚁 -> Soldado :Soldado:
-71 | Mathis Luke ▫️                                 -> Recluta :Recluta:
+71  | Mathis Luke ▫️                                 -> Recluta :Recluta:
 72 | Clark WHITER 🚁                            -> Soldado :Soldado:
 73 | 
 74 | Lucky Luke 🪖                                   -> Soldado :Soldado:
@@ -87,4 +87,5 @@
 87 | Félin Tower▫️                                   -> Recluta :Recluta:
 88 | Fox Nina ⚓                                      ﻿ -> Sergento Primero :SargentoPrimero: 
 89 | Jason Larkay 🪖                              -> Recluta :Recluta:
+
 90 | Freya Myers ▫️                                 -> Recluta :Recluta:
