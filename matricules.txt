@@ -17,18 +17,18 @@
 17 |  Gul Carlos 🪖                                    -> Sargento Primero :SargentoPrimero: 
 18 | Nolan wood ▫️                                   -> Recluta :Recluta: **
 19 | Brian Peterson 🚁                           * -> Recluta :Recluta: 
-20 | Martinez Kira 🚁                             -> Sergento en Test :Sargento: :AspirantFuerza: 
+20 | Martinez Kira 🚁                        -> Sergento en Test :Sargento: :AspirantFuerza: 
 21 |
-22 | Alvaro cortes 🚁                               -> Recluta :Recluta: 
-23 | Roméro Hiedler 🪖                         ->  Coronel en Test :Coronel~1: :ResponsableTerrestre: 
-24 | 
-25 | Jan Nowak ▫️                                  -> Recluta :Recluta: 
-26 | 
+22 | Alvaro cortes 🚁                          -> Recluta :Recluta: 
+23 | Roméro Hiedler 🪖                     ->  Coronel en Test :Coronel~1: :ResponsableTerrestre: 
+24 | Gouru Rayan ▫️                          -> Recluta :Recluta: 
+25 | Jan Nowak ▫️                              -> Recluta :Recluta: 
+26 | Malik Abik ▫️                               -> Recluta :Recluta: 
 27 |
-28 | Vodjio Torres ⚓                              -> Alfarez Segundo en Test :AlfarezSegundo: :AspirantMarine: 
-29 | Aylan thoands ▫️                           -> Recluta :Recluta: 
-30 | Damon Peterson ▫️                      ->*** Recluta :Recluta: 
-31  | Wolf Smith Nolan 🚁                     -> Cabo :Cabo: 
+28 | Vodjio Torres ⚓                           -> Alfarez Segundo en Test :AlfarezSegundo: :AspirantMarine: 
+29 | Aylan thoands ▫️                        -> Recluta :Recluta: 
+30 | Damon Peterson ▫️                   ->*** Recluta :Recluta: 
+31  | Wolf Smith Nolan 🚁                      -> Cabo :Cabo: 
 32 |
 33 | Hamza Bouzid ⚓                           -> Recluta :Recluta: 
 34 | Zayne Alvarez ⚓                            -> Teniente Coronel :TenienteCoronel: :AdjointMarine: 
@@ -43,16 +43,16 @@
 43 | Laponne Mattéo 🚁                      -> Coronel :Coronel~1: :ResponsableFuerza: 
 44 | Sergio Artys 🚁                              -> Teniente :Teniente: 
 45  | 
-46 |  Tom KIRKMANT ▫️                      -> Recluta :Recluta: 
+46 | Tom KIRKMANT ▫️                      -> Recluta :Recluta: 
 47 | Nass Bouzid  ▫️                              -> Recluta :Recluta:
-48 | 
+48 | Callisto Reyes 🪖                           -> Sergento Primero :AlfarezPrimero: 
 49 | 
 50 | Tony Garcia Galvino 🪖                -> Teniente en Test :Teniente: 
 51  | Diego Ramirez ▫️                          -> Recluta :Recluta:
 52 | 
 53 | Frost Thommas ⚓                       -> Soldado :Soldado: 
 54 |
-55 | 
+55 | Pablito Escanor ▫️                       -> Recluta :Recluta:
 56 | 
 57 | Thiago Rashford Muani ⚓         -> Soldado :Soldado: 
 58 | Souleymane Mané ▫️                  -> Recluta :Recluta:
