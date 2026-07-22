@@ -1,5 +1,9 @@
 <meta charset="utf-8">
 <title>Classement service — Heures par matricule</title>
+
+<script>
+const GS_URL = "https://script.google.com/macros/s/AKfycbzBe7mmsiIY21I1yK5YbO-900GrCwvibx2wk5GeF0DfoA2fMote-_fVrbc-d2zO-oY8uA/exec";
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0B0B'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%2316C784' stroke-width='7'/%3E%3Cg fill='none' stroke='%23FFFFFF' stroke-width='9' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M32 56 L50 40 L68 56'/%3E%3Cpath d='M32 72 L50 56 L68 72'/%3E%3C/g%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -432,10 +436,17 @@ const SHEET_BTN_LABEL="📤 Mettre à jour le Google Sheet";
 try{ gsInput.value=localStorage.getItem("gsUrl")||""; }catch(e){}
 gsInput.addEventListener("input",()=>{ try{ localStorage.setItem("gsUrl",gsInput.value.trim()); }catch(e){} });
 
+// L'adresse écrite en dur en haut du fichier (GS_URL) est prioritaire ;
+// la case en bas de page ne sert que si GS_URL est vide.
+function getSheetUrl(){
+  if(GS_URL.trim()) return GS_URL.trim();
+  return (gsInput.value||"").trim();
+}
+
 let lastSent="", sending=false;
 async function sendToSheet(manual){
   const btn=$("sendSheet");
-  const url=(gsInput.value||"").trim();
+  const url=getSheetUrl();
   if(!url){
     if(manual){
       btn.textContent="⚠ Renseigne d'abord l'adresse du script (en bas de page)";
